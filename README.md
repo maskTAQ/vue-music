@@ -6,7 +6,7 @@ npm update npm -g
 >在`style`标签中`@import`scss文件时，如果地址是别名需要在地址前加~
 
 ## 技术栈
-> 1. fastclisk 取消点击300ms延时
+1. fastclisk 取消点击300ms延时
 2. vue-lazyload 图片懒加载
 3. better-scroll 滑动库
 4. axios 前端ajax、后端代理

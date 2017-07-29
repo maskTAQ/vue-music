@@ -12,11 +12,13 @@ npm update npm -g
 4. axios 前端ajax、后端代理
 
 ## 经验
-> 给遍历的元素ref值对应的ref就是一个数据，比如下面代码`this.refs.demo`是一个数组
+1. 给遍历的元素ref值对应的ref就是一个数据，比如下面代码`this.refs.demo`是一个数组
 
   ```javascript
   <li v-for="iten in data" ref="demo"></li>
   ```
+2. Number | 0  === Math.floor(Number)
+`| 0`的用处跟`Math.floor`一样
 
 ## Build Setup
 

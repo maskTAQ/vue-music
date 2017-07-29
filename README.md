@@ -18,7 +18,16 @@ npm update npm -g
   <li v-for="iten in data" ref="demo"></li>
   ```
 2. Number | 0  === Math.floor(Number)
-`| 0`的用处跟`Math.floor`一样
+
+  `| 0`的用处跟`Math.floor`一样
+
+3. 歌手列表联动效果及title吸附效果的实现
+
+  1. 首先滑动右侧的导航列表会根据`touch.y`和每一项的高度获取当前激活的项的索引。
+  2. 根据索引可以获取左侧歌手列表对应的激活项的`dom`，然后调用`better-scroll`的`scrollToElement`方法传入`dom`实现导航列表联动左侧列表。
+  3. 获取到左侧列表激活的项可以的得到项在容器中y轴的位置，通过左侧列表滑动可以通过`better-scroll`内的监听滚动回调的方法获取`pos.y`，来获取项在容器中y轴的位置。
+  4. 通过在y轴的位置以及每项的高度可以获取当前项的索引。
+  5. 根据索引可以做导航列表的激活样式，也能固定左侧项的标题在顶部。
 
 ## Build Setup
 

@@ -105,6 +105,7 @@ export default {
         height += item.clientHeight
         this.listHeight.push(height)
       }
+      console.log(this.listHeight);
     },
     _scrollTo(index) {
       if (!index && index !== 0) {

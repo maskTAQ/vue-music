@@ -105,7 +105,6 @@ export default {
         height += item.clientHeight
         this.listHeight.push(height)
       }
-      console.log(this.listHeight);
     },
     _scrollTo(index) {
       if (!index && index !== 0) {
@@ -137,16 +136,21 @@ export default {
       for (let i = 0; i < listHeight.length - 1; i++) {
         let height1 = listHeight[i]
         let height2 = listHeight[i + 1]
+          //console.log(i,newY,-newY >= height1 && -newY < height2);
         if (-newY >= height1 && -newY < height2) {
+
           this.currentIndex = i
           this.diff = height2 + newY
           return
         }
       }
       // 当滚动到底部，且-newY大于最后一个元素的上限
+      // listHeight 将一根线分为来段需要三个切面 对应的俩个项 实际数组的长度比项数多一个
+      // -2是因为索引是从0开始的
       this.currentIndex = listHeight.length - 2
     },
     diff(newVal) {
+      //相邻的title没有接触到就没必要移动固定用的title了
       let fixedTop = (newVal > 0 && newVal < TITLE_HEIGHT) ? newVal - TITLE_HEIGHT : 0
       if (this.fixedTop === fixedTop) {
         return
@@ -231,6 +235,7 @@ export default {
             font-size: $font-size-small;
             color: $color-text-l;
             background: $color-highlight-background;
+            margin-top: -1px;
         }
     }
     .loading-container {

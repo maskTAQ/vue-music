@@ -19,7 +19,7 @@ npm update npm -g
   ```
 2. Number | 0  === Math.floor(Number)
 
-  `| 0`的用处跟`Math.floor`一样
+    `| 0`的用处跟`Math.floor`一样
 
 3. 歌手列表联动效果及title吸附效果的实现
 

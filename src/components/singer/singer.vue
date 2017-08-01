@@ -1,6 +1,7 @@
 <template>
 <div class="singer">
-  <list-view :data="singers"></list-view>
+  <list-view @select="selectSinger" :data="singers"></list-view>
+  <router-view></router-view>
 </div>
 </template>
 
@@ -13,6 +14,7 @@ import {
 } from 'api/config'
 import Singer from 'common/js/singer';
 import ListView from 'base/listview/listview'
+import {mapMutations} from 'vuex'
 
 const HOT_NAME = '热门';
 const HOT_SINGER_LEN = 10;
@@ -25,7 +27,7 @@ export default {
   created() {
     this._getSingerList();
   },
-  components:{
+  components: {
     ListView
   },
   methods: {
@@ -35,31 +37,31 @@ export default {
           this.singers = this._normalizeSinger(res.data.list)
         });
     },
-    _normalizeSinger(list){
+    _normalizeSinger(list) {
       let map = {
-        hot:{
-          title:HOT_NAME,
-          items:[]
+        hot: {
+          title: HOT_NAME,
+          items: []
         }
       }
-      list.forEach((item,i)=>{
-        if(i < HOT_SINGER_LEN){
+      list.forEach((item, i) => {
+        if (i < HOT_SINGER_LEN) {
           map.hot.items.push(new Singer({
-            id:item.Fsinger_mid,
-            name:item.Fsinger_name
+            id: item.Fsinger_mid,
+            name: item.Fsinger_name
           }));
         }
 
         const key = item.Findex;
-        if(!map[key]){
+        if (!map[key]) {
           map[key] = {
-            title:key,
-            items:[]
+            title: key,
+            items: []
           }
         }
         map[key].items.push(new Singer({
-          id:item.Fsinger_mid,
-          name:item.Fsinger_name
+          id: item.Fsinger_mid,
+          name: item.Fsinger_name
         }));
 
 
@@ -67,7 +69,7 @@ export default {
 
       //map > array
       let hot = [],
-      ret = [];
+        ret = [];
 
       for (let key in map) {
         let val = map[key]
@@ -83,7 +85,16 @@ export default {
       });
 
       return hot.concat(ret)
-    }
+    },
+    selectSinger(singer) {
+      this.$router.push({
+        path: `/singer/${singer.id}`
+      })
+      this.setSinger(singer)
+    },
+    ...mapMutations({
+      setSinger:'SET_SINGER'
+    })
   }
 }
 </script>
